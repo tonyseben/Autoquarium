@@ -4,16 +4,16 @@
 #include <Servo.h>
 #include "Schedule.h"
 
-int PIN_RELAY1 = 2;
-int PIN_RELAY2 = 3;
-int PIN_RELAY3 = 4;
-int PIN_RELAY4 = 5;
-int PIN_NEOPIXEL = 6;
-int PIN_BUZZER = 7;
-int PIN_SERVO1 = 10;
-int PIN_SERVO2 = 11;
-int PIN_PAUSE = 12;
-int PIN_PAUSE_INDICATOR = 13;
+const int PIN_RELAY1 = 2;
+const int PIN_RELAY2 = 3;
+const int PIN_RELAY3 = 4;
+const int PIN_RELAY4 = 5;
+const int PIN_NEOPIXEL = 6;
+const int PIN_BUZZER = 7;
+const int PIN_SERVO1 = 10;
+const int PIN_SERVO2 = 11;
+const int PIN_PAUSE = 8;
+const int PIN_PAUSE_INDICATOR = 13;
 
 DateTime TIME_NOW;
  
@@ -58,12 +58,14 @@ void setup() {
   
   FEED_SERVO1.attach(PIN_SERVO1);
   FEED_SERVO2.attach(PIN_SERVO2);
+  
   buzzSetup();
   delay(2000);
 }
 
 void loop() {
   Serial.println("loop..............................................................");
+  Serial.println((String)"PAUSE: button:" + digitalRead(PIN_PAUSE) +", led:"+digitalRead(PIN_PAUSE_INDICATOR));
 
   TIME_NOW = getTimeFromRTC();
   if (TIME_NOW == NULL) {

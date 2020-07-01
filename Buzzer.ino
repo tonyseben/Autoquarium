@@ -16,11 +16,11 @@ void buzzRelayOn(int count) {
 }
 
 void buzzPauseOn() {
-  tone(PIN_BUZZER, 5500, 200);
+  tone(PIN_BUZZER, 4000, 200);
 }
 
 void buzzPauseOff() {
-  tone(PIN_BUZZER, 5500, 200);
-  delay(250);
-  tone(PIN_BUZZER, 5500, 100);
+  tone(PIN_BUZZER, 4000, 100);
+  delay(220);
+  tone(PIN_BUZZER, 4000, 100);
 }

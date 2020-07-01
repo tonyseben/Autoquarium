@@ -1,7 +1,10 @@
 
 void runRelays() {
   Serial.print("Run Relays: ");
-  int hourNow = TIME_NOW.minute() % 24;
+  int hourNow = TIME_NOW.hour();
+
+  // For test
+  // int hourNow = TIME_NOW.minute() % 24;
 
   boolean relay1LastState = digitalRead(PIN_RELAY1);
   boolean relay2LastState = digitalRead(PIN_RELAY2);
