@@ -22,7 +22,7 @@ void buzzPauseOn() {
 
 void buzzPauseOff() {
   tone(PIN_BUZZER, 4000, 200);
-  delay(120);
+  delay(220);
 }
 
 void playPauseStartMelody() {

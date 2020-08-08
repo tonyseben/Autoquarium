@@ -1,4 +1,9 @@
 
+boolean relay1LastState = LOW;
+boolean relay2LastState = LOW;
+boolean relay3LastState = LOW;
+boolean relay4LastState = LOW;
+
 void loopRelays() {
   EVERY_N_SECONDS( 1 ) {
     int hourNow = TIME_NOW.hour();
@@ -6,51 +11,33 @@ void loopRelays() {
       hourNow = TIME_NOW.minute() % 24;
     }
 
-    boolean relay1LastState = digitalRead(PIN_RELAY1);
-    boolean relay2LastState = digitalRead(PIN_RELAY2);
-    boolean relay3LastState = digitalRead(PIN_RELAY3);
-    boolean relay4LastState = digitalRead(PIN_RELAY4);
+    relay1LastState = digitalRead(PIN_RELAY1);
+    relay2LastState = digitalRead(PIN_RELAY2);
+    relay3LastState = digitalRead(PIN_RELAY3);
+    relay4LastState = digitalRead(PIN_RELAY4);
 
-    boolean relay1State = LOW;
-    boolean relay2State = LOW;
-    boolean relay3State = LOW;
-    boolean relay4State = LOW;
+    if (IS_PAUSED) {
+      digitalWrite(PIN_RELAY1, LOW);
+      digitalWrite(PIN_RELAY2, LOW);
+      digitalWrite(PIN_RELAY3, HIGH);
+      digitalWrite(PIN_RELAY4, LOW);
 
-    if (!IS_PAUSED) {
-      relay1State = RELAY1_HOURS[hourNow];
-      relay2State = RELAY2_HOURS[hourNow];
-      relay3State = RELAY3_HOURS[hourNow];
-      relay4State = RELAY4_HOURS[hourNow];
     } else {
-      relay3State = HIGH;
+      digitalWrite(PIN_RELAY1, RELAY1_HOURS[hourNow]);
+      digitalWrite(PIN_RELAY2, RELAY2_HOURS[hourNow]);
+      digitalWrite(PIN_RELAY3, RELAY3_HOURS[hourNow]);
+      digitalWrite(PIN_RELAY4, RELAY4_HOURS[hourNow]);
+
+      if (relay1LastState != RELAY1_HOURS[hourNow]
+          || relay2LastState != RELAY2_HOURS[hourNow]
+          || relay3LastState != RELAY3_HOURS[hourNow]
+          || relay4LastState != RELAY4_HOURS[hourNow]) {
+        // Beeps if there is a state change on any of the relays
+        buzzRelayOn();
+      }
     }
-
-    digitalWrite(PIN_RELAY1, relay1State);
-    digitalWrite(PIN_RELAY2, relay2State);
-    digitalWrite(PIN_RELAY3, relay3State);
-    digitalWrite(PIN_RELAY4, relay4State);
-
-    if (relay1LastState != relay1State
-        || relay2LastState != relay2State
-        || relay3LastState != relay3State
-        || relay4LastState != relay4State) {
-          if(relay1LastState != relay1State){
-            dPrintln((String)">>>>>>>>>>>>>>>> RELAY 1 >>> " + relay1LastState + " to " + relay1State);
-          } 
-          if(relay2LastState != relay2State){
-            dPrintln((String)">>>>>>>>>>>>>>>> RELAY 2 >>> " + relay2LastState + " to " + relay2State);
-          }
-          if(relay3LastState != relay3State){
-            dPrintln((String)">>>>>>>>>>>>>>>> RELAY 3 >>> " + relay3LastState + " to " + relay3State);
-          }
-          if(relay4LastState != relay4State){
-            dPrintln((String)">>>>>>>>>>>>>>>> RELAY 4 >>> " + relay4LastState + " to " + relay4State);
-          }
-      // Beeps equals no of relays ON.
-      buzzRelayOn();
-    }
-
-    dPrintln((String)"R1:" + relay1State + " R2:" + relay2State
-             + " R3:" + relay3State + " R4:" + relay4State);
+    
+    dPrintln((String)"IDEAL R1:" + RELAY1_HOURS[hourNow] + " R2:" + RELAY2_HOURS[hourNow] + " R3:" + RELAY3_HOURS[hourNow] + " R4:" + RELAY4_HOURS[hourNow]);
+    dPrintln((String)"REAL  R1:" + digitalRead(PIN_RELAY1) + " R2:" + digitalRead(PIN_RELAY2) + " R3:" + digitalRead(PIN_RELAY3) + " R4:" + digitalRead(PIN_RELAY4));
   }
 }

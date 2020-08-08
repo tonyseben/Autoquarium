@@ -18,7 +18,6 @@ void setup() {
   setupRTC();
   setupBuzzer();
   setupLedStrip();
-  //delay(2000);
 }
 
 
@@ -32,10 +31,9 @@ void loop() {
     return;
   }
 
+  handlePause();
   loopRelays();
   loopLedStrip();
-  handlePause();
-  //delay(1000);
 }
 
 
