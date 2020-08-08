@@ -1,12 +1,21 @@
 
-int feedTimes[] = {9, 21};
-int feedOffset = 5; // minutes
-int feedDuration = 20; // minutes
-int position = 0;
+//Servo FEED_SERVO1;
+//Servo FEED_SERVO2;
+//
+//int feedTimes[] = {9, 21};
+//int feedOffset = 5; // minutes
+//int feedDuration = 20; // minutes
+//int position = 0;
+
+
+void setupFeeder(){
+  //FEED_SERVO1.attach(PIN_SERVO1);
+  //FEED_SERVO2.attach(PIN_SERVO2);
+}
 
 
 void runFeeder() {
-  //  Serial.print("Run feeder: ");
+  //  dPrint("Run feeder: ");
   //
   //  int hourNow = TIME_NOW.minute() % 24;
   //  int minuteNow = TIME_NOW.second();
@@ -34,6 +43,6 @@ void runFeeder() {
   //    }
   //  }
   //
-  //  Serial.println((String)" Status " + runStatus);
+  //  dPrintln((String)" Status " + runStatus);
   //  FEEDER_STATUS = runStatus;
 }

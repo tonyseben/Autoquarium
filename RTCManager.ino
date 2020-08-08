@@ -1,11 +1,24 @@
 
-DateTime getTimeFromRTC() {
+RTC_DS1307 RTC;
+char *result = malloc(20);
 
-  char *result = malloc(20);
+void setupRTC() {
+  Wire.begin();
+  if (!RTC.begin()) {
+    dPrintln("[!] RTC not Working");
+    while (true) {}
+  }
+  dPrintln("RTC Start");
+  if (DEBUG) {
+    RTC.adjust(DateTime(F(__DATE__), F(__TIME__)));
+  }
+}
+
+DateTime getTimeFromRTC() {
   DateTime now = RTC.now();
 
   if (now.year() == 2165) {
-    Serial.println("Error: Incorrect time in RTC.");
+    dPrintln("[!] RTC Incorrect time");
     return NULL;
   }
   else {
@@ -14,8 +27,10 @@ DateTime getTimeFromRTC() {
       "%02d/%02d/%02d %02d:%02d:%02d",
       now.day(), now.month(), now.year(), now.hour(), now.minute(), now.second());
 
-    Serial.print(result);
-    Serial.println((String)" | hourNow:" + now.minute()%24 + ", minuteNow:" + now.second() + " | unixTime:" + now.unixtime());
+    EVERY_N_SECONDS( 1 ) {
+      dPrint(result);
+      dPrintln((String)" | H:" + now.minute() % 24 + ", M:" + now.second());
+    }
     return now;
   }
 }

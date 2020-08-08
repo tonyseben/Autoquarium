@@ -1,44 +1,48 @@
-boolean IS_PAUSED = false;
+
 int pauseStartTimeStamp = -1;
 
 void handlePause() {
-  int nowTimestamp = TIME_NOW.unixtime();
+  EVERY_N_SECONDS( 1 ) {
+    dPrintln((String)"PAUSE: BTN:" + digitalRead(PIN_PAUSE) +", LED:"+digitalRead(PIN_PAUSE_INDICATOR));
 
-  if (digitalRead(PIN_PAUSE)) {
-    // Pause button pressed
+    int nowTimestamp = TIME_NOW.unixtime();
 
-    if (!IS_PAUSED) {
-      // Pause ON
-      pauseStartTimeStamp = nowTimestamp;
-      IS_PAUSED = true;
-      buzzPauseOn();
-      Serial.println("PAUSE: ON");
-    }
-    else if (nowTimestamp > pauseStartTimeStamp + 3) {
-      // Pause OFF
-      reset();
-      Serial.println("PAUSE: OFF");
-    }
-  }
+    if (digitalRead(PIN_PAUSE) == HIGH) {
+      // Pause button pressed
 
-  else if (IS_PAUSED) {
-    // In Paused state
-
-    if (nowTimestamp <= pauseStartTimeStamp + PAUSE_DURATION_SECONDS) {
-      // Before pause timeout
-      int previousStatus = digitalRead(PIN_PAUSE_INDICATOR);
-      if (previousStatus == LOW) {
-        digitalWrite(PIN_PAUSE_INDICATOR, HIGH);
-        playPauseStartMelody();
-
-        Serial.println("PAUSE: Starting ..");
+      if (!IS_PAUSED) {
+        // Pause ON
+        pauseStartTimeStamp = nowTimestamp;
+        IS_PAUSED = true;
+        buzzPauseOn();
+        dPrintln("PAUSE: ON");
       }
-      Serial.println((String)"PAUSE: In progress " + (nowTimestamp - pauseStartTimeStamp));
+      else if (nowTimestamp > pauseStartTimeStamp + 3) {
+        // Pause OFF
+        reset();
+        dPrintln("PAUSE: OFF");
+      }
     }
-    else {
-      // After pause timeout
-      reset();
-      Serial.println("PAUSE: TIMEOUT");
+
+    else if (IS_PAUSED) {
+      // In Paused state
+
+      if (nowTimestamp <= pauseStartTimeStamp + PAUSE_DURATION_SECONDS) {
+        // Before pause timeout
+        int previousStatus = digitalRead(PIN_PAUSE_INDICATOR);
+        if (previousStatus == LOW) {
+          digitalWrite(PIN_PAUSE_INDICATOR, HIGH);
+          playPauseStartMelody();
+
+          dPrintln("PAUSE: Start");
+        }
+        dPrintln((String)"PAUSE: " + (nowTimestamp - pauseStartTimeStamp));
+      }
+      else {
+        // After pause timeout
+        reset();
+        dPrintln("PAUSE: TIMEOUT");
+      }
     }
   }
 }
