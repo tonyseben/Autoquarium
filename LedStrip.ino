@@ -250,24 +250,24 @@ const TProgmemRGBGradientPalettePtr gGradientPalettes[] = {
   Sunset_Real_gp,
   Sunset_Real_gp,
   Sunset_Real_gp,
-  Sunset_Real_gp,
+  Sunset_Real_gp,     //6
   retro2_16_gp,
   es_landscape_33_gp,
+  es_landscape_33_gp, //9
   GMT_drywet_gp,
   GMT_drywet_gp,
-  ib15_gp,
-  ib15_gp,
+  ib15_gp,            //12
   ib15_gp,
   GMT_drywet_gp,
-  es_landscape_33_gp,
-  gr65_hult_gp,
-  gr65_hult_gp,
+  es_landscape_33_gp, //15
+  retro2_16_gp,
+  retro2_16_gp,
+  Sunset_Real_gp,         //18
   es_ocean_breeze_036_gp,
   es_ocean_breeze_068_gp,
-  Pink_Purple_gp,
+  Pink_Purple_gp,         //21
   Blue_Cyan_Yellow_gp,
-  es_rivendell_15_gp,
-  Analogous_1_gp
+  es_rivendell_15_gp
 };
 
 const uint8_t gGradientPaletteCount = sizeof( gGradientPalettes) / sizeof( TProgmemRGBGradientPalettePtr );
