@@ -2,8 +2,6 @@
 #error "Requires FastLED 3.1 or later; check github for latest code."
 #endif
 
-#define DATA_PIN    6
-//#define CLK_PIN   4
 #define LED_TYPE    WS2812B
 #define COLOR_ORDER GRB
 #define NUM_LEDS    68
@@ -20,7 +18,7 @@ void setupLedStrip() {
   delay(3000); // 3 second delay for recovery
 
   // tell FastLED about the LED strip configuration
-  FastLED.addLeds<LED_TYPE, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS)
+  FastLED.addLeds<LED_TYPE, PIN_NEOPIXEL, COLOR_ORDER>(leds, NUM_LEDS)
   //.setCorrection(TypicalLEDStrip) // cpt-city palettes have different color balance
   .setDither(BRIGHTNESS < 255);
 
@@ -60,7 +58,7 @@ void loopLedStrip()
     fill_solid( leds, NUM_LEDS, CRGB( 100, 100, 225));
     FastLED.setBrightness(BRIGHTNESS);
   }
-  else if (!RELAY3_HOURS[hourNow]) {
+  else if (!RELAY4_HOURS[hourNow]) {
     fill_solid( leds, NUM_LEDS, CRGB( 0, 0, 0));
     FastLED.setBrightness(0);
   }

@@ -1,6 +1,5 @@
 
-//Servo FEED_SERVO1;
-//Servo FEED_SERVO2;
+//Servo FEED_SERVO;
 //
 //int feedTimes[] = {9, 21};
 //int feedOffset = 5; // minutes
@@ -9,8 +8,7 @@
 
 
 void setupFeeder(){
-  //FEED_SERVO1.attach(PIN_SERVO1);
-  //FEED_SERVO2.attach(PIN_SERVO2);
+  //FEED_SERVO.attach(PIN_SERVO);
 }
 
 
@@ -33,12 +31,12 @@ void runFeeder() {
   //  if (runStatus == STATUS_RUNNING
   //  && minuteNow > feedOffset) {
   //    while (position < 180) {
-  //      FEED_SERVO1.write(position++);
+  //      FEED_SERVO.write(position++);
   //      delay(5);
   //    }
   //
   //    while (position >= 0) {
-  //      FEED_SERVO1.write(position--);
+  //      FEED_SERVO.write(position--);
   //      delay(5);
   //    }
   //  }

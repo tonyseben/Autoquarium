@@ -1,6 +1,6 @@
 
 RTC_DS1307 RTC;
-char *result = malloc(20);
+char *result = (char*) malloc(20);
 
 void setupRTC() {
   Wire.begin();
@@ -17,9 +17,9 @@ void setupRTC() {
 DateTime getTimeFromRTC() {
   DateTime now = RTC.now();
 
-  if (now.year() == 2165) {
+  if (now.year() < 2020 || now.year() > 2030) {
     dPrintln("[!] RTC Incorrect time");
-    return NULL;
+    return now;
   }
   else {
     sprintf(

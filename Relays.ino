@@ -19,8 +19,8 @@ void loopRelays() {
     if (IS_PAUSED) {
       digitalWrite(PIN_RELAY1, LOW);
       digitalWrite(PIN_RELAY2, LOW);
-      digitalWrite(PIN_RELAY3, HIGH);
-      digitalWrite(PIN_RELAY4, LOW);
+      digitalWrite(PIN_RELAY3, LOW);
+      digitalWrite(PIN_RELAY4, HIGH);
 
     } else {
       digitalWrite(PIN_RELAY1, RELAY1_HOURS[hourNow]);

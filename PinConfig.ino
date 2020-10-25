@@ -8,8 +8,7 @@ void setupPin() {
   pinMode(PIN_NEOPIXEL, OUTPUT);
   pinMode(PIN_BUZZER, OUTPUT);
   pinMode(PIN_PAUSE_INDICATOR, OUTPUT);
-  pinMode(PIN_SERVO1, OUTPUT);
-  pinMode(PIN_SERVO2, OUTPUT);
+  pinMode(PIN_SERVO, OUTPUT);
   
   pinMode(PIN_PAUSE, INPUT);
 
@@ -21,6 +20,5 @@ void setupPin() {
   digitalWrite(PIN_BUZZER, LOW);
   digitalWrite(PIN_PAUSE, LOW);
   digitalWrite(PIN_PAUSE_INDICATOR, LOW);
-  digitalWrite(PIN_SERVO1, LOW);
-  digitalWrite(PIN_SERVO2, LOW);
+  digitalWrite(PIN_SERVO, LOW);
 }
